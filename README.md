@@ -1,32 +1,64 @@
-# React + TypeScript + Vite
+# SHOEHUB — Flagship Autonomous Digital Experience
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An immersive, production-grade digital flagship designed for a visionary luxury biomechanical footwear house. Built at the convergence of high-end fashion editorial presentation, Apple-tier engineering scrollytelling, and real-time 3D WebGL interactivity.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🏛️ Experience Pillars
 
-## React Compiler
+1. **3D WebGL Scrollytelling Stage**
+   - Built with Three.js and React Three Fiber.
+   - Choreographed scroll states showcasing the Toray T700 carbon propulsion arch, directional micro-siped traction lugs, and seamless circular knit upper.
+   - Dynamic PBR variant switching (`midnight`, `beach`, `street`) with 360° rotational flourish on color switch.
+   - Responsive scaling calibrated for commanding viewport presence across standard and 4K displays.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. **Liquid Glass Design System**
+   - Sourced from the reference design system architecture.
+   - Proportional root scale: `clamp(0.75rem, 1.1713vw, 2.8125rem)` on `html` ensuring 100% fluid responsive scaling across any resolution.
+   - Dual-specular liquid pills (`.ios26-liquid-pill`) and backdrop-blurred glass pedestals (`.glass-panel`).
 
-## Expanding the Oxlint configuration
+3. **Editorial Typography & Tone**
+   - Typeset in Google Fonts `Outfit` and `Space Grotesk`.
+   - Strictly no screaming all-caps blocks or pseudo-technical markers.
+   - Refined Title Case and Sentence Case aligned with luxury fashion houses.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+4. **Acoustic & Tactile Feedback**
+   - Synthesized Web Audio API sound engine providing subtle luxury haptic clicks and alerts.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+---
+
+## 📁 Repository Context & Plans
+
+- **Master Plan & Architecture**: [`PROJECT_PLAN.md`](./PROJECT_PLAN.md)
+- **Active Progress Tracking**: [`PROGRESS.md`](./PROGRESS.md)
+- **Design System Inspiration Reference**: Sourced in `docs/`
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework**: React 19 + TypeScript + Vite 8
+- **Styling**: Tailwind CSS v4 + Vanilla CSS Design Tokens
+- **3D Graphics**: Three.js, `@react-three/fiber`, `@react-three/drei`
+- **Motion Engine**: Framer Motion
+- **Smooth Scrolling**: Lenis
+- **Icons**: Lucide React
+
+---
+
+## 🚀 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start local development server
+npm run dev
+
+# Build for production
+npm run build
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+---
+
+© 2026 ShoeHub Atelier. All rights reserved.
