@@ -95,10 +95,10 @@ export function ScrollShoeStage({ onAddToCart, onPlayTick }: ScrollShoeStageProp
       <div className="absolute top-0 inset-x-0 h-[100vh] flex flex-col justify-between pt-24 pb-8 z-10 pointer-events-auto">
         <div className="hero-container-wide flex flex-col items-center text-center">
           {/* Refined Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full ios26-liquid-pill text-[0.6875rem] font-sans font-medium text-zinc-300 tracking-wide mb-4">
+          {/* <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full ios26-liquid-pill text-[0.6875rem] font-sans font-medium text-zinc-300 tracking-wide mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-pulse" />
             <span>Propulsion Platform V.01</span>
-          </div>
+          </div> */}
 
           {/* Clean, Refined Headline */}
           <h1 className="font-headline text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.03em] text-white uppercase leading-[0.95] m-0">
@@ -119,11 +119,10 @@ export function ScrollShoeStage({ onAddToCart, onPlayTick }: ScrollShoeStageProp
                 key={cw.id}
                 type="button"
                 onClick={() => handleColorwaySelect(cw)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all cursor-pointer ${
-                  selectedColorway.id === cw.id
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all cursor-pointer ${selectedColorway.id === cw.id
                     ? 'bg-zinc-800 text-white shadow-md'
                     : 'text-zinc-400 hover:text-white'
-                }`}
+                  }`}
               >
                 <span
                   className="w-3 h-3 rounded-full border border-white/20 transition-transform active:scale-125"
