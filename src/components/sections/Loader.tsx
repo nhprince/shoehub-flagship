@@ -29,7 +29,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
         const increment = Math.floor(Math.random() * 15) + 8;
         return Math.min(100, prev + increment);
       });
-    }, 90);
+    }, 80);
 
     return () => clearInterval(interval);
   }, [onComplete]);
@@ -39,9 +39,9 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
       {!isDone && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, y: -40 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-50 bg-zinc-950 flex flex-col items-center justify-center select-none"
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-50 bg-[#fafafa] flex flex-col items-center justify-center select-none text-zinc-900"
         >
           {/* Animated Shoe Contour Wireframe */}
           <div className="relative w-48 h-28 mb-8 flex items-center justify-center">
@@ -49,7 +49,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
               viewBox="0 0 200 100"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-full text-zinc-100"
+              className="w-full h-full text-zinc-900"
             >
               {/* Sole Curve */}
               <motion.path
@@ -64,7 +64,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
               {/* Upper Profile */}
               <motion.path
                 d="M15 75 C20 50 45 42 70 38 C90 35 110 22 135 22 C155 22 175 48 185 75"
-                stroke="#bef264"
+                stroke="#10b981"
                 strokeWidth="2"
                 strokeLinecap="round"
                 initial={{ pathLength: 0 }}
@@ -74,7 +74,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
               {/* Internal Carbon Arch */}
               <motion.path
                 d="M65 65 C85 62 105 58 125 60"
-                stroke="#71717a"
+                stroke="#a1a1aa"
                 strokeWidth="2"
                 strokeDasharray="4 4"
                 initial={{ opacity: 0 }}
@@ -82,29 +82,28 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
                 transition={{ duration: 0.6, delay: 0.5 }}
               />
             </svg>
-            <div className="absolute inset-0 bg-radial from-lime-400/10 to-transparent blur-xl pointer-events-none" />
           </div>
 
           {/* Kinetic Brand Wordmark */}
           <div className="flex flex-col items-center gap-2">
-            <div className="flex items-center gap-2 font-display font-bold text-lg tracking-[0.25em] text-white">
+            <div className="flex items-center gap-2 font-display font-bold text-lg tracking-[0.25em] text-zinc-950">
               <span>SHOEHUB</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-lime-400 animate-ping" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
             </div>
-            <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">
-              INITIALIZING BIOMECHANICAL ENGINE
+            <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">
+              Biomechanical Engineering
             </span>
           </div>
 
           {/* Minimalist Progress Line */}
-          <div className="w-44 h-[2px] bg-zinc-900 rounded-full mt-8 overflow-hidden">
+          <div className="w-44 h-[2px] bg-zinc-200 rounded-full mt-8 overflow-hidden">
             <motion.div
-              className="h-full bg-lime-400"
+              className="h-full bg-zinc-900"
               style={{ width: `${progress}%` }}
               transition={{ ease: 'easeOut' }}
             />
           </div>
-          <span className="font-mono text-[11px] text-zinc-500 mt-2">{progress}%</span>
+          <span className="font-mono text-[11px] text-zinc-400 mt-2">{progress}%</span>
         </motion.div>
       )}
     </AnimatePresence>

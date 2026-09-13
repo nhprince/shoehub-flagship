@@ -79,165 +79,120 @@ export const MaterialLab: React.FC<MaterialLabProps> = ({ onPlayTick }) => {
   };
 
   return (
-    <section id="material-lab" className="py-20 sm:py-28 bg-zinc-950 border-t border-zinc-900/80 relative">
+    <section id="material-lab" className="py-24 sm:py-32 bg-[#fafafa] border-t border-zinc-200/80 relative">
       <div className="section-container">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-5">
           <div>
-            <span className="text-[0.6875rem] font-sans font-medium text-zinc-400 tracking-wide block mb-1">
+            <span className="text-[0.6875rem] font-sans font-medium text-zinc-500 tracking-wide block mb-1.5">
               Advanced Materials
             </span>
-            <h2 className="font-headline text-2xl sm:text-4xl font-bold text-white tracking-tight m-0">
+            <h2 className="font-headline text-3xl sm:text-5xl font-extrabold text-zinc-950 tracking-tight m-0">
               Molecular Formulation
             </h2>
           </div>
-          <p className="text-xs sm:text-sm font-sans text-zinc-400 max-w-md">
+          <p className="text-xs sm:text-sm font-sans text-zinc-600 max-w-md leading-relaxed">
             Interactive benchmark comparator. Select a material class to audit tensile rigidity, density, and kinetic elasticity.
           </p>
         </div>
 
-        {/* Interactive Comparator Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          {/* Swatch Selector Cards */}
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2.5">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Material Selector List */}
+          <div className="lg:col-span-5 space-y-3">
             {MATERIALS.map((mat) => {
-              const isSelected = mat.id === selectedMaterial.id;
+              const isSelected = selectedMaterial.id === mat.id;
               return (
                 <button
                   key={mat.id}
                   type="button"
                   onClick={() => handleSelect(mat)}
-                  className={`p-4 rounded-xl text-left transition-all duration-200 border cursor-pointer ${
-                    isSelected
-                      ? 'bg-zinc-900 border-white/30 shadow-lg'
-                      : 'bg-zinc-950/40 border-white/5 hover:border-white/15 hover:bg-zinc-900/40'
-                  }`}
+                  className={`w-full text-left p-5 rounded-3xl transition-all cursor-pointer border ${isSelected
+                      ? 'glass-panel shadow-md border-zinc-300'
+                      : 'bg-white/50 border-black/5 hover:bg-white/80 hover:border-black/10'
+                    }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[0.625rem] font-mono text-zinc-500 uppercase">{mat.origin}</span>
-                    <span
-                      className={`w-2 h-2 rounded-full transition-transform ${
-                        isSelected ? 'bg-lime-400 scale-125' : 'bg-zinc-700'
-                      }`}
-                    />
+                    <span className="text-[0.625rem] font-mono text-zinc-500 uppercase tracking-wider">
+                      {mat.category}
+                    </span>
+                    <span className="text-[0.625rem] font-mono text-zinc-400">
+                      {mat.origin}
+                    </span>
                   </div>
-                  <h3
-                    className={`font-headline text-sm font-semibold mt-1 tracking-tight ${
-                      isSelected ? 'text-white' : 'text-zinc-300'
-                    }`}
-                  >
+                  <h3 className="font-headline font-bold text-base text-zinc-950 mt-1.5 tracking-tight">
                     {mat.name}
                   </h3>
-                  <p className="text-xs text-zinc-400 mt-0.5">{mat.category}</p>
+                  <p className="text-xs text-zinc-600 mt-1.5 line-clamp-2 font-sans leading-relaxed">
+                    {mat.description}
+                  </p>
                 </button>
               );
             })}
           </div>
 
-          {/* Right Detailed Telemetry Panel */}
+          {/* Active Material Deep Dive Inspector */}
           <div className="lg:col-span-7">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={selectedMaterial.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.25 }}
-                className="h-full rounded-2xl glass-panel p-6 sm:p-8 flex flex-col justify-between"
-              >
+            <motion.div
+              key={selectedMaterial.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="rounded-3xl glass-panel p-6 sm:p-10 shadow-lg"
+            >
+              <div className="flex items-start justify-between border-b border-black/5 pb-6">
                 <div>
-                  <div className="flex items-center justify-between pb-3 border-b border-white/5">
-                    <div className="flex items-center gap-2 text-xs font-sans text-zinc-400">
-                      <Microscope className="w-3.5 h-3.5 text-lime-400" />
-                      <span>Specimen Audit</span>
-                    </div>
-                    <span className="text-xs font-mono text-lime-400">
-                      {selectedMaterial.molecularFormula}
-                    </span>
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full ios26-liquid-pill text-[0.6875rem] font-sans font-medium text-emerald-800 tracking-wide mb-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span>{selectedMaterial.category}</span>
                   </div>
-
-                  <h3 className="font-headline text-xl sm:text-2xl font-bold text-white tracking-tight mt-5">
+                  <h3 className="font-headline text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight">
                     {selectedMaterial.name}
                   </h3>
-                  <p className="text-xs font-mono text-zinc-400 mt-0.5">
-                    Origin: {selectedMaterial.origin}
+                  <p className="text-xs font-mono text-zinc-500 mt-1">
+                    Formula: {selectedMaterial.molecularFormula}
                   </p>
+                </div>
+                <div className="text-right">
+                  <span className="text-[0.625rem] font-mono text-zinc-400 uppercase block">Origin</span>
+                  <span className="text-xs font-mono text-zinc-900 font-semibold">{selectedMaterial.origin}</span>
+                </div>
+              </div>
 
-                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mt-3 font-sans">
-                    {selectedMaterial.description}
-                  </p>
+              <p className="mt-6 text-xs sm:text-sm text-zinc-700 font-sans leading-relaxed">
+                {selectedMaterial.description}
+              </p>
 
-                  {/* Telemetry Progress Bars */}
-                  <div className="mt-6 space-y-3.5 pt-5 border-t border-white/5">
-                    <div>
-                      <div className="flex justify-between text-xs font-mono mb-1">
-                        <span className="text-zinc-400">Tensile Strength Modulus</span>
-                        <span className="text-white font-semibold">{selectedMaterial.tensile}%</span>
-                      </div>
-                      <div className="w-full h-1.5 bg-black/50 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full bg-lime-400"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${selectedMaterial.tensile}%` }}
-                          transition={{ duration: 0.5 }}
-                        />
-                      </div>
+              {/* Live Metric Bars */}
+              <div className="mt-8 space-y-4">
+                {[
+                  { label: 'Tensile Rigidity', value: selectedMaterial.tensile, color: 'bg-zinc-950' },
+                  { label: 'Cellular Density', value: selectedMaterial.density, color: 'bg-emerald-600' },
+                  { label: 'Hydrophobic Index', value: selectedMaterial.hydrophobic, color: 'bg-sky-600' },
+                  { label: 'Kinetic Resilience', value: selectedMaterial.resilience, color: 'bg-amber-600' },
+                ].map((spec) => (
+                  <div key={spec.label} className="space-y-1.5">
+                    <div className="flex justify-between text-xs font-mono">
+                      <span className="text-zinc-600">{spec.label}</span>
+                      <span className="text-zinc-950 font-semibold">{spec.value}/100</span>
                     </div>
-
-                    <div>
-                      <div className="flex justify-between text-xs font-mono mb-1">
-                        <span className="text-zinc-400">Density & Featherweight Index</span>
-                        <span className="text-white font-semibold">{selectedMaterial.density}%</span>
-                      </div>
-                      <div className="w-full h-1.5 bg-black/50 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full bg-sky-400"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${selectedMaterial.density}%` }}
-                          transition={{ duration: 0.5 }}
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between text-xs font-mono mb-1">
-                        <span className="text-zinc-400">Hydrophobic Surface Beading</span>
-                        <span className="text-white font-semibold">{selectedMaterial.hydrophobic}%</span>
-                      </div>
-                      <div className="w-full h-1.5 bg-black/50 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full bg-indigo-400"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${selectedMaterial.hydrophobic}%` }}
-                          transition={{ duration: 0.5 }}
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between text-xs font-mono mb-1">
-                        <span className="text-zinc-400">Kinetic Spring Resilience</span>
-                        <span className="text-white font-semibold">{selectedMaterial.resilience}%</span>
-                      </div>
-                      <div className="w-full h-1.5 bg-black/50 rounded-full overflow-hidden">
-                        <motion.div
-                          className="h-full bg-amber-400"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${selectedMaterial.resilience}%` }}
-                          transition={{ duration: 0.5 }}
-                        />
-                      </div>
+                    <div className="h-2 w-full bg-zinc-100 rounded-full overflow-hidden p-0.5 border border-black/5">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        animate={{ width: `${spec.value}%` }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                        className={`h-full rounded-full ${spec.color}`}
+                      />
                     </div>
                   </div>
-                </div>
+                ))}
+              </div>
 
-                {/* Bottom Footnote */}
-                <div className="pt-4 border-t border-white/5 text-[0.6875rem] font-mono text-zinc-500 flex items-center justify-between mt-5">
-                  <span>Standard: DIN EN ISO 527-4</span>
-                  <span>Zero toxic binders</span>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+              {/* Bottom Footnote */}
+              <div className="pt-6 border-t border-black/5 text-[0.6875rem] font-mono text-zinc-500 flex items-center justify-between mt-8">
+                <span>Standard: DIN EN ISO 527-4</span>
+                <span>Zero toxic binders</span>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

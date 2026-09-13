@@ -67,20 +67,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Brand Logo */}
             <a
               href="#"
-              className="flex items-center gap-1.5 font-headline font-bold text-base sm:text-lg tracking-tight text-white hover:text-zinc-200 transition-colors"
+              className="flex items-center gap-1.5 font-headline font-bold text-base sm:text-lg tracking-tight text-zinc-900 hover:text-black transition-colors"
             >
               <span>SHOEHUB</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-lime-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             </a>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-7">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-xs font-sans font-medium text-zinc-400 hover:text-white transition-colors"
+                  className="text-xs font-sans font-medium text-zinc-600 hover:text-zinc-950 transition-colors"
                 >
                   {link.label}
                 </a>
@@ -93,31 +93,33 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 type="button"
                 onClick={onOpenSearch}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/5 transition-all cursor-pointer"
+                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-600 hover:text-zinc-950 hover:bg-black/5 transition-all cursor-pointer"
                 title="Search (Cmd+K)"
                 aria-label="Search"
               >
                 <Search className="w-3.5 h-3.5" />
               </button>
 
-              {/* Currency */}
+              {/* Currency Selector */}
               <button
                 type="button"
                 onClick={nextCurrency}
-                className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[0.6875rem] font-mono text-zinc-400 hover:text-white hover:bg-white/5 transition-colors cursor-pointer"
-                title="Change Currency"
+                className="px-2.5 py-1 rounded-full text-[11px] font-mono text-zinc-600 hover:text-zinc-950 hover:bg-black/5 transition-all cursor-pointer"
+                title="Toggle Currency"
               >
                 {currency}
               </button>
 
-              {/* Sound */}
+              {/* Sound Audio Toggle */}
               <button
                 type="button"
                 onClick={onToggleSound}
-                className={`hidden sm:inline-flex w-8 h-8 rounded-full items-center justify-center transition-all cursor-pointer ${
-                  soundEnabled ? 'text-lime-400 hover:bg-white/5' : 'text-zinc-600 hover:text-zinc-400'
+                className={`w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer ${
+                  soundEnabled
+                    ? 'text-emerald-600 hover:bg-emerald-50'
+                    : 'text-zinc-400 hover:text-zinc-600 hover:bg-black/5'
                 }`}
-                title={soundEnabled ? 'Mute Haptic Sound' : 'Enable Haptic Sound'}
+                title={soundEnabled ? 'Acoustics Active' : 'Muted'}
                 aria-label="Toggle Sound"
               >
                 {soundEnabled ? <Volume2 className="w-3.5 h-3.5" /> : <VolumeX className="w-3.5 h-3.5" />}
@@ -127,19 +129,19 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 type="button"
                 onClick={onOpenCart}
-                className="relative flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/15 text-white border border-white/15 transition-all cursor-pointer"
-                aria-label={`Shopping bag with ${cartCount} items`}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 transition-all active:scale-95 shadow-sm cursor-pointer ml-1"
+                aria-label={`Cart with ${cartCount} items`}
               >
                 <ShoppingBag className="w-3.5 h-3.5" />
-                <span className="font-mono text-xs font-semibold">{cartCount}</span>
+                <span className="text-xs font-mono font-semibold">{cartCount}</span>
               </button>
 
-              {/* Mobile Hamburger Toggle */}
+              {/* Mobile Menu Button */}
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden w-8 h-8 flex items-center justify-center text-zinc-400 hover:text-white cursor-pointer"
-                aria-label="Toggle menu"
+                className="md:hidden w-8 h-8 rounded-full flex items-center justify-center text-zinc-600 hover:text-zinc-950 hover:bg-black/5 transition-all cursor-pointer ml-1"
+                aria-label="Toggle Navigation"
               >
                 {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
               </button>
@@ -163,20 +165,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-sm font-sans font-medium text-zinc-300 hover:text-white py-1.5 border-b border-white/5"
+                  className="text-sm font-sans font-medium text-zinc-700 hover:text-zinc-950 py-2 border-b border-black/5"
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="flex items-center justify-between pt-3 text-xs font-mono text-zinc-400">
-                <span>CURRENCY: {currency}</span>
+              <div className="flex items-center justify-between pt-3 text-xs font-mono text-zinc-500">
+                <span>Currency: {currency}</span>
                 <button
                   type="button"
                   onClick={onToggleSound}
-                  className="flex items-center gap-1 text-zinc-400 hover:text-white"
+                  className="flex items-center gap-1 text-zinc-600 hover:text-zinc-950"
                 >
-                  {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-lime-400" /> : <VolumeX className="w-3.5 h-3.5" />}
-                  <span>SOUND {soundEnabled ? 'ON' : 'OFF'}</span>
+                  {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-emerald-600" /> : <VolumeX className="w-3.5 h-3.5" />}
+                  <span>Sound {soundEnabled ? 'Active' : 'Muted'}</span>
                 </button>
               </div>
             </nav>

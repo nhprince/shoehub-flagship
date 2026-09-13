@@ -59,22 +59,22 @@ export const Footer: React.FC<FooterProps> = ({
   ];
 
   return (
-    <footer className="bg-zinc-950 border-t border-zinc-900 text-zinc-400 py-16 sm:py-24 text-xs font-mono">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8">
+    <footer className="bg-[#fafafa] border-t border-zinc-200/80 text-zinc-600 py-16 sm:py-24 text-xs font-mono">
+      <div className="section-container">
         {/* Top Tier: Brand & Navigation */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-zinc-900">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-zinc-200/80">
           {/* Brand Info */}
           <div className="md:col-span-4 space-y-4">
-            <div className="flex items-center gap-2 font-display text-2xl font-black tracking-tight text-white">
+            <div className="flex items-center gap-2 font-headline text-2xl font-bold tracking-tight text-zinc-950">
               <span>SHOEHUB</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-lime-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             </div>
-            <p className="text-zinc-500 max-w-sm leading-relaxed text-xs">
+            <p className="text-zinc-600 max-w-sm leading-relaxed text-xs font-sans">
               Autonomous digital experience. Crafted at the intersection of biological kinetic propulsion, autoclave composites, and quiet luxury.
             </p>
-            <div className="pt-2 flex items-center gap-2 text-[11px] text-zinc-500">
-              <Globe className="w-3.5 h-3.5 text-zinc-400" />
-              <span>DISPATCHING WORLDWIDE VIA DHL CO₂-NEUTRAL</span>
+            <div className="pt-2 flex items-center gap-2 text-[11px] text-zinc-500 font-mono">
+              <Globe className="w-3.5 h-3.5 text-zinc-700" />
+              <span>Worldwide carbon-neutral dispatch via DHL Express</span>
             </div>
           </div>
 
@@ -82,15 +82,15 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
             {navGroups.map((grp) => (
               <div key={grp.title} className="space-y-3">
-                <h4 className="text-zinc-200 font-bold uppercase tracking-wider text-[11px]">
+                <h4 className="text-zinc-950 font-bold uppercase tracking-wider text-[11px] font-headline">
                   {grp.title}
                 </h4>
-                <ul className="space-y-2">
+                <ul className="space-y-2 font-sans">
                   {grp.links.map((link) => (
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="text-zinc-500 hover:text-white transition-colors"
+                        className="text-zinc-500 hover:text-zinc-950 transition-colors text-xs"
                       >
                         {link.label}
                       </a>
@@ -102,53 +102,47 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-zinc-500">
-          <div>
-            © {new Date().getFullYear()} SHOEHUB INC. ATHLETICS DIVISION. ALL RIGHTS RESERVED.
+        {/* Bottom Tier: Sub-footer Controls & Copyright */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-zinc-500 text-[11px]">
+          <div className="flex items-center gap-6">
+            <span>© {new Date().getFullYear()} ShoeHub Atelier. All rights reserved.</span>
+            <span className="hidden sm:inline">•</span>
+            <span className="hidden sm:inline">Precision Propulsion Series</span>
           </div>
 
-          {/* Controls */}
           <div className="flex items-center gap-4">
-            {/* Currency selector */}
-            <div className="flex items-center gap-1.5">
-              <span>CURRENCY:</span>
-              {['USD', 'EUR', 'GBP'].map((curr) => (
-                <button
-                  key={curr}
-                  type="button"
-                  onClick={() => onChangeCurrency(curr)}
-                  className={`px-1.5 py-0.5 rounded cursor-pointer ${
-                    currency === curr ? 'bg-zinc-800 text-white' : 'hover:text-zinc-300'
-                  }`}
-                >
-                  {curr}
-                </button>
-              ))}
-            </div>
-
-            <span>•</span>
+            {/* Currency Selector */}
+            <button
+              type="button"
+              onClick={() => {
+                const list = ['USD', 'EUR', 'GBP'];
+                const next = list[(list.indexOf(currency) + 1) % list.length];
+                onChangeCurrency(next);
+              }}
+              className="px-2.5 py-1 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-800 transition-colors cursor-pointer"
+            >
+              {currency}
+            </button>
 
             {/* Sound Toggle */}
             <button
               type="button"
               onClick={onToggleSound}
-              className="flex items-center gap-1 hover:text-white cursor-pointer transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-800 transition-colors cursor-pointer"
             >
-              {soundEnabled ? <Volume2 className="w-3.5 h-3.5 text-lime-400" /> : <VolumeX className="w-3.5 h-3.5" />}
-              <span>SOUND {soundEnabled ? 'ON' : 'OFF'}</span>
+              {soundEnabled ? <Volume2 className="w-3 h-3 text-emerald-600" /> : <VolumeX className="w-3 h-3 text-zinc-400" />}
+              <span>{soundEnabled ? 'Acoustics On' : 'Muted'}</span>
             </button>
 
-            <span>•</span>
-
-            {/* Scroll to top */}
+            {/* Back to top */}
             <button
               type="button"
               onClick={scrollToTop}
-              className="flex items-center gap-1 text-zinc-400 hover:text-white transition-colors cursor-pointer"
+              className="w-8 h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-800 flex items-center justify-center transition-colors cursor-pointer"
+              title="Return to top"
+              aria-label="Return to top"
             >
-              <span>TOP</span>
-              <ArrowUp className="w-3 h-3" />
+              <ArrowUp className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>

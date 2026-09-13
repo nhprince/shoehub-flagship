@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Trash2, Plus, Minus, ArrowRight, ShieldCheck, Truck, CheckCircle2 } from 'lucide-react';
+import { X, Trash2, Plus, Minus, ArrowRight, ShieldCheck, Truck, CheckCircle2, ShoppingBag } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import type { CartItem } from '../../types';
-import { Button } from '../ui/Button';
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -82,7 +81,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity"
+            className="fixed inset-0 bg-black/40 backdrop-blur-md transition-opacity"
           />
 
           <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
@@ -91,20 +90,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="w-screen max-w-md bg-zinc-950 border-l border-zinc-800 text-zinc-100 flex flex-col shadow-2xl"
+              className="w-screen max-w-md bg-white/95 backdrop-blur-2xl border-l border-black/10 text-zinc-900 flex flex-col shadow-2xl"
             >
               {/* Drawer Header */}
-              <div className="p-6 border-b border-zinc-800 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <h2 className="font-display font-bold text-lg tracking-tight">BAG</h2>
-                  <span className="text-xs font-mono text-zinc-400 bg-zinc-900 px-2 py-0.5 rounded-full border border-zinc-800">
-                    {items.length} ITEMS
+              <div className="p-6 border-b border-black/5 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <h2 className="font-headline font-bold text-lg tracking-tight text-zinc-950">Shopping Bag</h2>
+                  <span className="text-xs font-mono text-zinc-600 bg-zinc-100 px-2.5 py-0.5 rounded-full border border-black/5">
+                    {items.length} items
                   </span>
                 </div>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="p-2 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors cursor-pointer"
+                  className="p-2 rounded-full text-zinc-500 hover:text-zinc-950 hover:bg-black/5 transition-colors cursor-pointer"
                   aria-label="Close cart"
                 >
                   <X className="w-5 h-5" />
@@ -112,21 +111,22 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               </div>
 
               {/* Free Shipping Progress Indicator */}
-              <div className="px-6 py-3.5 bg-zinc-900/50 border-b border-zinc-800/80">
-                <div className="flex items-center justify-between text-xs font-mono mb-1.5">
-                  <span className="text-zinc-400 flex items-center gap-1.5">
-                    <Truck className="w-3.5 h-3.5 text-lime-400" />
+              <div className="px-6 py-4 bg-zinc-50/80 border-b border-black/5">
+                <div className="flex items-center justify-between text-xs font-sans mb-2">
+                  <span className="text-zinc-600 flex items-center gap-1.5">
+                    <Truck className="w-3.5 h-3.5 text-emerald-600" />
                     {remainingForFreeShipping > 0
-                      ? `Add ${formatPrice(remainingForFreeShipping)} for complimentary express delivery`
-                      : 'Complimentary Worldwide Express Unlocked'}
+                      ? `Add ${formatPrice(remainingForFreeShipping)} for complimentary express shipping`
+                      : 'You unlocked complimentary express shipping'}
+                  </span>
+                  <span className="font-mono font-semibold text-zinc-900">
+                    {Math.round(shippingProgress)}%
                   </span>
                 </div>
-                <div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-lime-400"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${shippingProgress}%` }}
-                    transition={{ duration: 0.5 }}
+                <div className="w-full h-1.5 bg-zinc-200 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-emerald-600 rounded-full transition-all duration-500"
+                    style={{ width: `${shippingProgress}%` }}
                   />
                 </div>
               </div>
@@ -141,46 +141,51 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   >
                     <CheckCircle2 className="w-8 h-8" />
                   </motion.div>
-                  <h3 className="font-display text-xl font-bold mb-2">ORDER ALLOCATED</h3>
-                  <p className="text-sm text-zinc-400 mb-6 leading-relaxed">
+                  <h3 className="font-headline text-xl font-bold text-zinc-950 mb-2">Order Allocated</h3>
+                  <p className="text-sm text-zinc-600 mb-6 leading-relaxed font-sans">
                     Your ShoeHub order has been queued for precision atelier assembly. You will receive an encrypted dispatch confirmation shortly.
                   </p>
-                  <Button
-                    variant="secondary"
+                  <button
+                    type="button"
                     onClick={() => {
                       setCheckoutSuccess(false);
                       onClose();
                     }}
+                    className="px-6 py-3 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 text-xs font-headline font-semibold transition-all active:scale-95 cursor-pointer"
                   >
-                    CONTINUE EXPLORING
-                  </Button>
+                    Continue Exploring
+                  </button>
                 </div>
               ) : items.length === 0 ? (
                 <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-                  <div className="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-600 mb-4">
-                    <X className="w-6 h-6" />
+                  <div className="w-16 h-16 rounded-full bg-zinc-100 border border-black/5 flex items-center justify-center text-zinc-400 mb-4">
+                    <ShoppingBag className="w-6 h-6" />
                   </div>
-                  <h3 className="font-display font-semibold text-base mb-1">YOUR BAG IS EMPTY</h3>
-                  <p className="text-xs text-zinc-500 mb-6 max-w-xs">
+                  <h3 className="font-headline font-bold text-base text-zinc-950 mb-1">Your bag is empty</h3>
+                  <p className="text-xs text-zinc-500 mb-6 max-w-xs font-sans">
                     Explore our hyper-light propulsion silhouettes and architectural designs.
                   </p>
-                  <Button variant="primary" size="sm" onClick={onClose}>
-                    VIEW COLLECTION
-                  </Button>
+                  <button
+                    type="button"
+                    onClick={onClose}
+                    className="px-6 py-2.5 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 text-xs font-headline font-semibold transition-all active:scale-95 cursor-pointer"
+                  >
+                    View Collection
+                  </button>
                 </div>
               ) : (
-                <div className="flex-1 overflow-y-auto p-6 divide-y divide-zinc-900">
+                <div className="flex-1 overflow-y-auto p-6 divide-y divide-black/5">
                   {items.map((item) => (
                     <div
                       key={`${item.shoe.id}-${item.selectedColorway.id}-${item.selectedSize}`}
                       className="py-4 flex gap-4 first:pt-0"
                     >
                       {/* Product Thumbnail */}
-                      <div className="w-20 h-20 rounded-xl bg-zinc-900 border border-zinc-800 p-2 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
+                      <div className="w-20 h-20 rounded-2xl bg-zinc-100 border border-black/5 p-2 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
                         <img
                           src={item.shoe.image}
                           alt={item.shoe.name}
-                          className="w-full h-full object-contain filter contrast-110"
+                          className="w-full h-full object-contain"
                         />
                       </div>
 
@@ -188,19 +193,19 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <div className="flex-1 flex flex-col justify-between">
                         <div>
                           <div className="flex items-start justify-between">
-                            <h4 className="font-display font-semibold text-sm leading-tight">
+                            <h4 className="font-headline font-bold text-sm leading-tight text-zinc-950">
                               {item.shoe.name}
                             </h4>
-                            <span className="font-mono text-xs font-medium ml-2">
+                            <span className="font-mono text-xs font-semibold ml-2 text-zinc-900">
                               {formatPrice(item.shoe.price * item.quantity)}
                             </span>
                           </div>
-                          <div className="text-xs text-zinc-400 mt-1 flex items-center gap-2">
+                          <div className="text-xs text-zinc-500 mt-1 flex items-center gap-2">
                             <span>US {item.selectedSize}</span>
                             <span>•</span>
                             <span className="flex items-center gap-1">
                               <span
-                                className="w-2 h-2 rounded-full border border-zinc-700 inline-block"
+                                className="w-2 h-2 rounded-full border border-black/10 inline-block"
                                 style={{ backgroundColor: item.selectedColorway.hex }}
                               />
                               {item.selectedColorway.name}
@@ -210,7 +215,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
                         {/* Quantity and Delete Controls */}
                         <div className="flex items-center justify-between mt-3">
-                          <div className="inline-flex items-center border border-zinc-800 rounded-lg bg-zinc-900/60 p-0.5 text-xs">
+                          <div className="inline-flex items-center border border-zinc-200 rounded-xl bg-zinc-50 p-0.5 text-xs">
                             <button
                               type="button"
                               onClick={() =>
@@ -221,12 +226,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                                   item.quantity - 1
                                 )
                               }
-                              className="p-1 text-zinc-400 hover:text-white cursor-pointer"
+                              className="p-1 text-zinc-600 hover:text-zinc-950 cursor-pointer"
                               aria-label="Decrease quantity"
                             >
                               <Minus className="w-3 h-3" />
                             </button>
-                            <span className="px-2 font-mono text-xs">{item.quantity}</span>
+                            <span className="px-2.5 font-mono text-xs font-semibold text-zinc-900">{item.quantity}</span>
                             <button
                               type="button"
                               onClick={() =>
@@ -237,7 +242,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                                   item.quantity + 1
                                 )
                               }
-                              className="p-1 text-zinc-400 hover:text-white cursor-pointer"
+                              className="p-1 text-zinc-600 hover:text-zinc-950 cursor-pointer"
                               aria-label="Increase quantity"
                             >
                               <Plus className="w-3 h-3" />
@@ -247,10 +252,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                           <button
                             type="button"
                             onClick={() =>
-                              onRemoveItem(item.shoe.id, item.selectedColorway.id, item.selectedSize)
+                              onRemoveItem(
+                                item.shoe.id,
+                                item.selectedColorway.id,
+                                item.selectedSize
+                              )
                             }
-                            className="text-zinc-500 hover:text-rose-400 transition-colors p-1 cursor-pointer"
-                            aria-label="Remove item"
+                            className="p-1.5 text-zinc-400 hover:text-rose-600 transition-colors cursor-pointer"
+                            aria-label="Remove product"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -270,70 +279,69 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       type="text"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
-                      placeholder="PROMO CODE (e.g. VIP20)"
-                      className="flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-xs font-mono uppercase tracking-wider text-white placeholder:text-zinc-600 focus:outline-none focus:border-zinc-500"
+                      placeholder="Promo code (e.g. VIP20)"
+                      className="flex-1 bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-xs font-mono text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-500"
                     />
                     <button
                       type="submit"
-                      className="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-xs font-mono text-zinc-200 rounded-lg cursor-pointer transition-colors"
+                      className="px-4 py-2.5 bg-zinc-900 hover:bg-zinc-800 text-xs font-mono text-white rounded-xl cursor-pointer transition-colors"
                     >
-                      APPLY
+                      Apply
                     </button>
                   </form>
                   {discount > 0 && (
-                    <div className="text-[11px] font-mono text-lime-400 flex items-center gap-1">
+                    <div className="text-[11px] font-mono text-emerald-600 flex items-center gap-1">
                       <span>✓ 20% VIP Atelier discount applied</span>
                     </div>
                   )}
                   {promoError && (
-                    <div className="text-[11px] font-mono text-rose-400">
+                    <div className="text-[11px] font-mono text-rose-500">
                       {promoError}
                     </div>
                   )}
 
                   {/* Pricing Breakdown */}
-                  <div className="space-y-1.5 text-xs text-zinc-400">
+                  <div className="space-y-2 text-xs text-zinc-600">
                     <div className="flex justify-between">
                       <span>Subtotal</span>
-                      <span className="font-mono text-zinc-200">{formatPrice(subtotal)}</span>
+                      <span className="font-mono text-zinc-900 font-semibold">{formatPrice(subtotal)}</span>
                     </div>
                     {discount > 0 && (
-                      <div className="flex justify-between text-lime-400">
+                      <div className="flex justify-between text-emerald-600 font-semibold">
                         <span>VIP Discount (20%)</span>
                         <span className="font-mono">-{formatPrice(subtotal * discount)}</span>
                       </div>
                     )}
                     <div className="flex justify-between">
                       <span>Express Shipping</span>
-                      <span className="font-mono text-zinc-200">
-                        {remainingForFreeShipping === 0 ? 'FREE' : formatPrice(25)}
+                      <span className="font-mono text-zinc-900 font-semibold">
+                        {remainingForFreeShipping === 0 ? 'Complimentary' : formatPrice(25)}
                       </span>
                     </div>
-                    <div className="flex justify-between text-sm font-semibold text-white pt-2 border-t border-zinc-900">
+                    <div className="flex justify-between text-sm font-bold text-zinc-950 pt-2.5 border-t border-black/5">
                       <span>Estimated Total</span>
                       <span className="font-mono text-base">{formatPrice(finalTotal)}</span>
                     </div>
                   </div>
 
                   {/* Checkout Button */}
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    className="w-full"
+                  <button
+                    type="button"
                     onClick={handleCheckout}
-                    isLoading={isCheckingOut}
-                    icon={<ArrowRight className="w-4 h-4" />}
+                    disabled={isCheckingOut}
+                    className="w-full py-3.5 px-4 rounded-2xl bg-zinc-950 text-white hover:bg-zinc-800 text-xs font-headline font-semibold flex items-center justify-center gap-2 transition-all active:scale-98 shadow-md cursor-pointer disabled:opacity-50"
                   >
-                    PROCEED TO CHECKOUT
-                  </Button>
+                    <span>Proceed to Checkout</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
 
-                  <div className="flex items-center justify-center gap-4 text-[10px] font-mono text-zinc-500 pt-1">
+                  <div className="flex items-center justify-center gap-4 text-[11px] font-mono text-zinc-500 pt-1">
                     <span className="flex items-center gap-1">
-                      <ShieldCheck className="w-3 h-3 text-zinc-400" />
-                      ENCRYPTED 256-BIT
+                      <ShieldCheck className="w-3.5 h-3.5 text-zinc-600" />
+                      Encrypted 256-Bit
                     </span>
                     <span>•</span>
-                    <span>30-DAY TRIAL RETURN</span>
+                    <span>30-Day Atelier Trial</span>
                   </div>
                 </div>
               )}

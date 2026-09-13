@@ -44,46 +44,46 @@ export function ShoeModel({ scrollProgress = 0, autoRotate = false }: ShoeModelP
     let targetRotZ = -0.04;
     let targetPosX = 0;
     let targetPosY = -0.05;
-    let targetScale = 1.95; // Large, impressive studio presence
+    let targetScale = 3.6; // Authoritative, luxury hero presence (visible, not tiny)
 
     if (autoRotate) {
       targetRotY = time * 0.4;
-    } else if (scrollProgress <= 0.3) {
+    } else if (scrollProgress <= 0.28) {
       // Phase 1: Hero Floating 3/4 Angle
-      const t = scrollProgress / 0.3;
-      targetRotX = THREE.MathUtils.lerp(0.12, 0.05, t);
-      targetRotY = THREE.MathUtils.lerp(0.35, 0.1, t);
+      const t = scrollProgress / 0.28;
+      targetRotX = THREE.MathUtils.lerp(0.12, 0.06, t);
+      targetRotY = THREE.MathUtils.lerp(0.35, 0.12, t);
       targetRotZ = -0.04;
-      targetPosX = THREE.MathUtils.lerp(0, 0.15, t);
+      targetPosX = THREE.MathUtils.lerp(0, 0.25, t);
       targetPosY = THREE.MathUtils.lerp(-0.05, 0, t);
-      targetScale = 1.95;
-    } else if (scrollProgress <= 0.6) {
+      targetScale = 3.6;
+    } else if (scrollProgress <= 0.58) {
       // Phase 2: Lateral Profile (Carbon Shank focus)
-      const t = (scrollProgress - 0.3) / 0.3;
-      targetRotX = THREE.MathUtils.lerp(0.05, 0.02, t);
-      targetRotY = THREE.MathUtils.lerp(0.1, 0.0, t); // True lateral profile facing camera
+      const t = (scrollProgress - 0.28) / 0.30;
+      targetRotX = THREE.MathUtils.lerp(0.06, 0.02, t);
+      targetRotY = THREE.MathUtils.lerp(0.12, 0.0, t); // True lateral profile facing camera
       targetRotZ = THREE.MathUtils.lerp(-0.04, 0.01, t);
-      targetPosX = THREE.MathUtils.lerp(0.15, 0.5, t); // Comfortably on the right, text on left
+      targetPosX = THREE.MathUtils.lerp(0.25, 0.55, t); // Centered on right half, text on left
       targetPosY = THREE.MathUtils.lerp(0, 0.02, t);
-      targetScale = THREE.MathUtils.lerp(1.95, 2.1, t);
-    } else if (scrollProgress <= 0.85) {
+      targetScale = THREE.MathUtils.lerp(3.6, 3.8, t);
+    } else if (scrollProgress <= 0.82) {
       // Phase 3: Outsole Pitch Up (Traction Lugs focus)
-      const t = (scrollProgress - 0.6) / 0.25;
-      targetRotX = THREE.MathUtils.lerp(0.02, Math.PI * 0.42, t); // Sole tilted up toward camera
+      const t = (scrollProgress - 0.58) / 0.24;
+      targetRotX = THREE.MathUtils.lerp(0.02, Math.PI * 0.45, t); // Outsole tilted up toward camera
       targetRotY = THREE.MathUtils.lerp(0.0, 0.15, t);
       targetRotZ = THREE.MathUtils.lerp(0.01, -0.22, t);
-      targetPosX = THREE.MathUtils.lerp(0.5, -0.45, t); // Comfortably on the left, text on right
-      targetPosY = THREE.MathUtils.lerp(0.02, -0.05, t);
-      targetScale = THREE.MathUtils.lerp(2.1, 1.95, t);
+      targetPosX = THREE.MathUtils.lerp(0.55, -0.55, t); // Smoothly glides to left half, text on right
+      targetPosY = THREE.MathUtils.lerp(0.02, -0.06, t);
+      targetScale = THREE.MathUtils.lerp(3.8, 3.6, t);
     } else {
       // Phase 4: Top-Down Aerodynamic Entry (Knit Upper focus)
-      const t = (scrollProgress - 0.85) / 0.15;
-      targetRotX = THREE.MathUtils.lerp(Math.PI * 0.42, -Math.PI * 0.32, t); // Nose down toward camera
-      targetRotY = THREE.MathUtils.lerp(0.15, 0.05, t);
+      const t = (scrollProgress - 0.82) / 0.18;
+      targetRotX = THREE.MathUtils.lerp(Math.PI * 0.45, -Math.PI * 0.32, t); // Nose down toward camera
+      targetRotY = THREE.MathUtils.lerp(0.15, 0.06, t);
       targetRotZ = THREE.MathUtils.lerp(-0.22, 0.0, t);
-      targetPosX = THREE.MathUtils.lerp(-0.45, 0.45, t); // On the right, text on left
-      targetPosY = THREE.MathUtils.lerp(-0.05, 0.05, t);
-      targetScale = THREE.MathUtils.lerp(1.95, 1.9, t);
+      targetPosX = THREE.MathUtils.lerp(-0.55, 0.52, t); // On the right, text on left
+      targetPosY = THREE.MathUtils.lerp(-0.06, 0.04, t);
+      targetScale = THREE.MathUtils.lerp(3.6, 3.5, t);
     }
 
     // Gentle organic breathing float
