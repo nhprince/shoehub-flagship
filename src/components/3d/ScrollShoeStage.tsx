@@ -13,9 +13,9 @@ interface ScrollShoeStageProps {
   onPlayTick?: () => void;
 }
 
-export function ScrollShoeStage({ onAddToCart, onPlayTick }: ScrollShoeStageProps) {
+export function ScrollShoeStage({ onAddToCart }: ScrollShoeStageProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [selectedColorway, setSelectedColorway] = useState<Colorway>(HERO_COLORWAYS[0]);
+  const [selectedColorway] = useState<Colorway>(HERO_COLORWAYS[0]);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [hasWebGL, setHasWebGL] = useState(true);
 
@@ -41,11 +41,6 @@ export function ScrollShoeStage({ onAddToCart, onPlayTick }: ScrollShoeStageProp
       setScrollProgress(v);
     });
   }, [scrollYProgress]);
-
-  const handleColorwaySelect = (cw: Colorway) => {
-    setSelectedColorway(cw);
-    onPlayTick?.();
-  };
 
   return (
     <section ref={containerRef} className="relative h-[320vh] bg-zinc-950">
@@ -111,28 +106,7 @@ export function ScrollShoeStage({ onAddToCart, onPlayTick }: ScrollShoeStageProp
         </div>
 
         {/* Hero Bottom Controls */}
-        <div className="hero-container-wide flex flex-col sm:flex-row items-center justify-between gap-4">
-          {/* Colorway Pills with Animated Feedback */}
-          <div className="flex items-center gap-1.5 p-1 rounded-full ios26-liquid-pill">
-            {HERO_COLORWAYS.map((cw) => (
-              <button
-                key={cw.id}
-                type="button"
-                onClick={() => handleColorwaySelect(cw)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all cursor-pointer ${selectedColorway.id === cw.id
-                    ? 'bg-zinc-800 text-white shadow-md'
-                    : 'text-zinc-400 hover:text-white'
-                  }`}
-              >
-                <span
-                  className="w-3 h-3 rounded-full border border-white/20 transition-transform active:scale-125"
-                  style={{ backgroundColor: cw.hex }}
-                />
-                <span className="text-[0.6875rem] font-sans font-medium">{cw.name}</span>
-              </button>
-            ))}
-          </div>
-
+        <div className="hero-container-wide flex items-center justify-center sm:justify-end">
           {/* Order Action Button */}
           <button
             type="button"
