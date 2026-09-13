@@ -106,8 +106,8 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-zinc-500 text-[11px]">
           <div className="flex items-center gap-6">
             <span>© {new Date().getFullYear()} ShoeHub Atelier. All rights reserved.</span>
-            <span className="hidden sm:inline">•</span>
-            <span className="hidden sm:inline">Precision Propulsion Series</span>
+            {/* <span className="hidden sm:inline">•</span> */}
+            {/* <span className="hidden sm:inline">Precision Propulsion Series</span> */}
           </div>
 
           <div className="flex items-center gap-4">

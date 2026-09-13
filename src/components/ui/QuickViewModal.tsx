@@ -109,7 +109,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                 <span className="font-mono text-2xl font-bold text-zinc-950">
                   {formatPrice(shoe.price)}
                 </span>
-                <span className="text-xs font-mono text-zinc-500">Includes global taxes</span>
+                {/* <span className="text-xs font-mono text-zinc-500">Includes global taxes</span> */}
               </div>
 
               <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed mt-4 font-sans">
@@ -145,11 +145,10 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                       key={cw.id}
                       type="button"
                       onClick={() => setSelectedColorway(cw)}
-                      className={`w-7 h-7 rounded-full border transition-all cursor-pointer ${
-                        selectedColorway.id === cw.id
+                      className={`w-7 h-7 rounded-full border transition-all cursor-pointer ${selectedColorway.id === cw.id
                           ? 'border-zinc-950 scale-110 shadow-md ring-2 ring-zinc-950/20'
                           : 'border-zinc-300 opacity-70 hover:opacity-100'
-                      }`}
+                        }`}
                       style={{ backgroundColor: cw.hex }}
                       title={cw.name}
                     />
@@ -173,11 +172,10 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                       key={size}
                       type="button"
                       onClick={() => setSelectedSize(size)}
-                      className={`w-10 h-8 rounded-lg text-xs font-mono transition-all cursor-pointer ${
-                        selectedSize === size
+                      className={`w-10 h-8 rounded-lg text-xs font-mono transition-all cursor-pointer ${selectedSize === size
                           ? 'bg-zinc-950 text-white font-bold shadow-sm'
                           : 'bg-zinc-100 text-zinc-700 hover:bg-zinc-200 border border-black/5'
-                      }`}
+                        }`}
                     >
                       {size}
                     </button>

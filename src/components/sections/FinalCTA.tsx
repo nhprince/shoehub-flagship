@@ -24,9 +24,9 @@ export const FinalCTA: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-emerald-500/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-4xl mx-auto px-6 sm:px-8 text-center relative z-10">
-        <span className="inline-flex items-center gap-1.5 text-xs font-mono tracking-widest text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-4 py-1.5 rounded-full">
+        {/* <span className="inline-flex items-center gap-1.5 text-xs font-mono tracking-widest text-emerald-800 bg-emerald-50 border border-emerald-200/80 px-4 py-1.5 rounded-full">
           Production Allocation • 2026 Cycle
-        </span>
+        </span> */}
 
         <h2 className="font-headline text-4xl sm:text-6xl md:text-7xl font-extrabold text-zinc-950 tracking-[-0.03em] leading-[0.98] mt-6">
           Your next stride is <span className="text-zinc-400 font-light italic font-serif">engineered.</span>
@@ -71,12 +71,12 @@ export const FinalCTA: React.FC = () => {
           )}
 
           <div className="flex items-center justify-center gap-4 text-[11px] font-mono text-zinc-500 mt-4">
-            <span className="flex items-center gap-1">
+            {/* <span className="flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5 text-zinc-600" />
               Encrypted Dispatch
             </span>
             <span>•</span>
-            <span>Strictly Private Allocation</span>
+            <span>Strictly Private Allocation</span> */}
           </div>
         </div>
 

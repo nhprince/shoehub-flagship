@@ -152,7 +152,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
 
             <div className="p-3 bg-zinc-50 border-t border-black/5 text-[11px] font-mono text-zinc-400 flex justify-between items-center px-4">
               <span>Press ESC to dismiss</span>
-              <span>ShoeHub Product Directory</span>
+              {/* <span>ShoeHub Product Directory</span> */}
             </div>
           </motion.div>
         </div>
